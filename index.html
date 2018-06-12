@@ -2,7 +2,7 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="terminal.js"></script>
+        
         
         <script>
             
@@ -81,8 +81,14 @@
         <button id="btn_getTransactions" >Visualizza le transazioni</button>
 
 
-        <div class="footer" id="terminal"></div>
-       <!-- <script src="terminal-manager.js"></script>-->
+        <div style="
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height: 50%;
+    width:100%;" contenteditable="false" id="terminal"></div>
+        <script src="ptty.jquery.js"></script>
+        <script src="terminal-manager.js"></script>
     </body>
 
 </html>

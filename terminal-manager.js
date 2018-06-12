@@ -1,4 +1,13 @@
-var t1 = new Terminal()
-t1.setHeight("200px")
-t1.setWidth('600px')
-document.body.appendChild(t1.html)
+var $ptty;
+    var $ptty = $('#terminal').Ptty({
+        i18n : {
+            welcome : '5D3 CHAIN VER 1.0.1 beta \nThe blockchain project\n\n',
+        },
+        ps: ">",
+
+        
+
+    });
+
+    $ptty.echo('we tony')
+    //$ptty.run_command('clear'); //cancella quello scritto nel terminale
