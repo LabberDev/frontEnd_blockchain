@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.getJSON("http://localhost:3001/blocks", function(data){
+            var items = [];
+            $.each( data[0], function( key, val ) {
+                items.push( "<li id='" + key + "'>" + val + "</li>" );
+            });
+            $( "<ul/>", {
+             "class": "my-new-list",
+             html: items.join( "" )
+            }).appendTo( "body" );
+        });
+    });
+});
+</script>
+</head>
+<body>
+
+<button>Send an HTTP GET request to a page and get the result back</button>
+
+</body>
+</html>
