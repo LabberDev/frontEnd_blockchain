@@ -2,18 +2,69 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="terminal.js"></script>
+        
         <script>
+            
+            
+
             $(document).ready(function(){
                 $("#btn_getBlock").click(function(){
                     $.getJSON("http://localhost:3001/blocks", function(data)
                     {
                         var items = [];
+                        $("<ul>").appendTo("body");
                         $.each( data[0], function( key, val )
                         {
-                            items.push( "<li id='" + key + "'>" + val + "</li>" );
-                        });
-
-                                                
+                            if (!(typeof(val) === 'object'))
+                                items.push( "<li id='" + key + "'>" + key + ": " + val + "</li>" );
+                            else
+                            {
+                                $.each( val, function( key2, val2 )
+                                {
+                                    if (!(typeof(val2) === 'object'))
+                                        items.push( "<li id='" + key2 + "'>" + key2 + ": " + val2 + "</li>" );
+                                    else
+                                        $.each( val2, function( key3, val3 )
+                                        {
+                                            items.push( "<li id='" + key3 + "'>" + key3 + ": " + val3 + "</li>" );
+                                        });
+                                });
+                            }
+                        });                                                
+                        
+                        $( "<ul/>", {
+                        "class": "my-new-list",
+                        html: items.join( "" )
+                        }).appendTo( "body" );
+                    });
+                });
+            });
+            
+            $(document).ready(function(){
+                $("#btn_getTransactions").click(function(){
+                    $.getJSON("http://localhost:3001/transactions", function(data)
+                    {
+                        var items = [];
+                        $("<ul>").appendTo("body");
+                        $.each( data[0], function( key, val )
+                        {
+                            if (!(typeof(val) === 'object'))
+                                items.push( "<li id='" + key + "'>" + key + ": " + val + "</li>" );
+                            else
+                            {
+                                $.each( val, function( key2, val2 )
+                                {
+                                    if (!(typeof(val2) === 'object'))
+                                        items.push( "<li id='" + key2 + "'>" + key2 + ": " + val2 + "</li>" );
+                                    else
+                                        $.each( val2, function( key3, val3 )
+                                        {
+                                            items.push( "<li id='" + key3 + "'>" + key3 + ": " + val3 + "</li>" );
+                                        });
+                                });
+                            }
+                        });                                                
                         
                         $( "<ul/>", {
                         "class": "my-new-list",
@@ -27,10 +78,11 @@
     <body>
         
         <button id="btn_getBlock" >Visualizza i blocchi della blockchain</button>
-        <div id="id_div1" ></div>
+        <button id="btn_getTransactions" >Visualizza le transazioni</button>
 
 
-        <div id="terminal"></div>
+        <div class="footer" id="terminal"></div>
+       <!-- <script src="terminal-manager.js"></script>-->
     </body>
 
 </html>
