@@ -4,12 +4,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
-                $("button").click(function(){
-                    $.getJSON("http://localhost:3001/blocks", function(data){
+                $("#btn_getBlock").click(function(){
+                    $.getJSON("http://localhost:3001/blocks", function(data)
+                    {
                         var items = [];
-                        $.each( data[0], function( key, val ) {
+                        $.each( data[0], function( key, val )
+                        {
                             items.push( "<li id='" + key + "'>" + val + "</li>" );
                         });
+
+                                                
+                        
                         $( "<ul/>", {
                         "class": "my-new-list",
                         html: items.join( "" )
@@ -20,8 +25,12 @@
         </script>
     </head>
     <body>
+        
+        <button id="btn_getBlock" >Visualizza i blocchi della blockchain</button>
+        <div id="id_div1" ></div>
 
-        <button>Send an HTTP GET request to a page and get the result back</button>
 
+        <div id="terminal"></div>
     </body>
+
 </html>
