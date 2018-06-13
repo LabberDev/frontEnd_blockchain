@@ -4,9 +4,9 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="./terminal-manager.js"></script>
         
         <script>
+            
 
             function get_req(req)
             {
@@ -21,12 +21,18 @@
             {
                 $("#btn_getBlock").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.echo("_____________________________/blocks_____________________________");
                     get_req("http://localhost:3001/blocks");
                 });
 
                 $("#btn_getTransactions").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/transactions_____________________________");
                     get_req("http://localhost:3001/transactions");
@@ -34,6 +40,9 @@
 
                 $("#btn_getMine-Transactions").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/mine-transactions_____________________________");
                     get_req("http://localhost:3001/mine-transactions");
@@ -41,6 +50,9 @@
 
                 $("#btn_getPublic-Key").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/public-key_____________________________");
                     get_req("http://localhost:3001/public-key");
@@ -48,14 +60,16 @@
 
                 $("#btn_getBalance").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/balance_____________________________");
                     get_req("http://localhost:3001/balance");
                 });
-            });
+            
 
-            $(document).ready(function()
-            {
+           
                 $("#btn_postTransact").click(function()
                 {
                     $ptty.run_command('clear');
@@ -64,6 +78,9 @@
                     if($('#input').css('display')=='none'){
                         $('#input').show();
                     }
+
+                    
+                });
 
                     $("#btn_sendTransact").click(function(){
                         
@@ -93,34 +110,26 @@
                             }
                         }
 
-                        var transact = new Object();
-                        transact.recipient = $("#indata_recipient").val();
-                        transact.amount = $("#indata_amount").val();
-
-                       // var myString = JSON.stringify(transact);
-
-                        //console.log(myString);
-
-                        // $.post("http://localhost:3001/transact", myString, function(result){
-                                
-                        //         console.log(result);
-                        // });
+                        
+                       console.log(JSON.stringify({recipient: $("#indata_recipient").val(), amount: parseFloat($("#indata_amount").val())}));
 
                         $.ajax({
                                 type: 'POST',
                                 url: 'http://localhost:3001/transact',
-                                data: JSON.stringify(transact), // or JSON.stringify ({name: 'jonas'}),
-                                success: function(data) { console.log(data); },
+                                data: JSON.stringify({recipient: $("#indata_recipient").val(), amount: parseFloat($("#indata_amount").val())}), // or JSON.stringify ({name: 'jonas'}),
+                                success: function(data) { $ptty.echo(JSON.stringify(data, undefined, 2)); },
                                 contentType: "application/json",
-                                dataType: 'json'
-                                
-                            });
+                                dataType: 'json'        
+                        });
                         
+                       
 
+                       
+                            
                         
 
                     });
-                });
+
             });
         </script>
     </head>
@@ -147,8 +156,8 @@
     resize: none;
     width: 50%;
     float: right;
-    height: 80%;
-    height: 50vh;" contenteditable="false" id="terminal"></div>
+    height: 10%;
+    height: 100vh;" contenteditable="false" id="terminal"></div>
 
     
         <script src="ptty.jquery.js"></script>
