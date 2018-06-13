@@ -1,99 +1,53 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
         
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="./terminal-manager.js"></script>
         
         <script>
-            items   =   [];
 
             function get_req(req)
             {
-                $.getJSON(req, function(data)
-                {                        
-                    for (var i=0; i<data.length; i++)
-                        print_each(data[i]);
-                });
-
-                $ptty.echo(items);
-
-                items   =   [];
-            }
-
-            function print_each( arrayToPrint )
-            {
-                $.each( arrayToPrint, function( indice, valore )
+                $ptty.run_command('clear');   
+                $.getJSON(req, function(data)  
                 {
-                    if (!(typeof(valore) === 'object'))
-                        items.push( indice + ": " + valore + "<br>");
-                    else
-                    {   
-                        items.push( indice + ": " + "<br>");
-                        print_each(valore);
-                    }
+                    $ptty.echo(JSON.stringify(data, undefined, 2));
                 });
-            }
-            
+            }           
 
             $(document).ready(function()
             {
                 $("#btn_getBlock").click(function()
                 {
-                    if($('#input').css('display')!='none'){
-                        $('#input').hide();
-                    }
-                    $ptty.run_command('clear');
                     $ptty.echo("_____________________________/blocks_____________________________");
-                    get_req("http://localhost:3001/blocks");                   
+                    get_req("http://localhost:3001/blocks");
                 });
-            });
-            
-            $(document).ready(function()
-            {
+
                 $("#btn_getTransactions").click(function()
                 {
-                    if($('#input').css('display')!='none'){
-                        $('#input').hide();
-                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/transactions_____________________________");
                     get_req("http://localhost:3001/transactions");
                 });
-            });
 
-            $(document).ready(function()
-            {
                 $("#btn_getMine-Transactions").click(function()
                 {
-                    if($('#input').css('display')!='none'){
-                        $('#input').hide();
-                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/mine-transactions_____________________________");
                     get_req("http://localhost:3001/mine-transactions");
                 });
-            });
 
-            $(document).ready(function()
-            {
                 $("#btn_getPublic-Key").click(function()
                 {
-                    if($('#input').css('display')!='none'){
-                        $('#input').hide();
-                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/public-key_____________________________");
                     get_req("http://localhost:3001/public-key");
                 });
-            });
-            
-            $(document).ready(function()
-            {
+
                 $("#btn_getBalance").click(function()
                 {
-                    if($('#input').css('display')!='none'){
-                        $('#input').hide();
-                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/balance_____________________________");
                     get_req("http://localhost:3001/balance");
