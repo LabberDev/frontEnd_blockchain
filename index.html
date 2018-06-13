@@ -7,6 +7,7 @@
         
         <script>
             
+            var endPoint;
 
             function get_req(req)
             {
@@ -19,59 +20,103 @@
 
             $(document).ready(function()
             {
+
+                $("#btn_setPort").click(function()
+                {
+                    if($('#input_port').val() == null)
+                    {
+                        //console.log($('#input_portController').val());
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
+                    endPoint = $('#input_portController').val();
+                    $('#input_port').hide();
+                });
+
                 $("#btn_getBlock").click(function()
                 {
+                    
+                    if(!endPoint)
+                    {
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
                     if($('#input').css('display')!='none'){
                         $('#input').hide();
                     }
                     // $ptty.echo("_____________________________/blocks_____________________________");
-                    get_req("http://localhost:3001/blocks");
+                    get_req("http://localhost:"+endPoint+"/blocks");
                 });
 
                 $("#btn_getTransactions").click(function()
                 {
+                    if(!endPoint)
+                    {
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
                     if($('#input').css('display')!='none'){
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
                     // $ptty.echo("_____________________________/transactions_____________________________");
-                    get_req("http://localhost:3001/transactions");
+                    get_req("http://localhost:"+endPoint+"/transactions");
                 });
 
                 $("#btn_getMine-Transactions").click(function()
                 {
+                    if(!endPoint)
+                    {
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
                     if($('#input').css('display')!='none'){
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
                     // $ptty.echo("_____________________________/mine-transactions_____________________________");
-                    get_req("http://localhost:3001/mine-transactions");
+                    get_req("http://localhost:"+endPoint+"/mine-transactions");
                 });
 
                 $("#btn_getPublic-Key").click(function()
                 {
+                    if(!endPoint)
+                    {
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
                     if($('#input').css('display')!='none'){
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
                     // $ptty.echo("_____________________________/public-key_____________________________");
-                    get_req("http://localhost:3001/public-key");
+                    get_req("http://localhost:"+endPoint+"/public-key");
                 });
 
                 $("#btn_getBalance").click(function()
                 {
+                    if(!endPoint)
+                    {
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
                     if($('#input').css('display')!='none'){
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
                     // $ptty.echo("_____________________________/balance_____________________________");
-                    get_req("http://localhost:3001/balance");
+                    get_req("http://localhost:"+endPoint+"/balance");
                 });
             
 
            
                 $("#btn_postTransact").click(function()
                 {
+                    if(!endPoint)
+                    {
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
                     $ptty.run_command('clear');
                     // $ptty.echo("_____________________________/transact_____________________________");
                     
@@ -84,6 +129,11 @@
 
                     $("#btn_sendTransact").click(function(){
                         
+                        if(!endPoint)
+                    {
+                        $ptty.echo("Devi settare la porta dell'applicazione");
+                        return;
+                    }
                         $ptty.run_command('clear');
                         // $ptty.echo("_____________________________/transact_____________________________");
                         
@@ -111,23 +161,17 @@
                         }
 
                         
-                       console.log(JSON.stringify({recipient: $("#indata_recipient").val(), amount: parseFloat($("#indata_amount").val())}));
+                      // console.log(JSON.stringify({recipient: $("#indata_recipient").val(), amount: parseFloat($("#indata_amount").val())}));
 
                         $.ajax({
                                 type: 'POST',
-                                url: 'http://localhost:3001/transact',
+                                url: 'http://localhost:'+endPoint+'/transact',
                                 data: JSON.stringify({recipient: $("#indata_recipient").val(), amount: parseFloat($("#indata_amount").val())}), // or JSON.stringify ({name: 'jonas'}),
                                 success: function(data) { $ptty.echo(JSON.stringify(data, undefined, 2)); },
                                 contentType: "application/json",
                                 dataType: 'json'        
                         });
                         
-                       
-
-                       
-                            
-                        
-
                     });
 
             });
@@ -154,9 +198,9 @@
                 <button id="btn_sendTransact" class="button" >Invia denaro</button>
             </div>
             
-            <div>
+            <div id="input_port">
                 <h2>Porta:</h2>
-                <input type="number" id="input_portController" style="margin-left: 18px"><br><br>
+                <input type="number" value="3001" id="input_portController" style="margin-left: 18px"><br><br>
                 <button id="btn_setPort" class="button" >Connessione Porta</button>
             </div>
         </div>
@@ -164,7 +208,7 @@
         
         <div class="logo">
             <div class="img">
-                <img src="pr_bianco.png" style="width:273px;height:112px;" align="middle">
+                <img src="logo.png" style="width:273px;height:112px;" align="middle">
             </div>
             <div class="terminal" contenteditable="false" id="terminal"></div>
         </div>
