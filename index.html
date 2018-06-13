@@ -2,7 +2,7 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="./terminal-manager.js"></script>
+        
         
         <script>
             items   =   [];
@@ -39,6 +39,9 @@
             {
                 $("#btn_getBlock").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/blocks_____________________________");
                     get_req("http://localhost:3001/blocks");                   
@@ -49,6 +52,9 @@
             {
                 $("#btn_getTransactions").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/transactions_____________________________");
                     get_req("http://localhost:3001/transactions");
@@ -59,6 +65,9 @@
             {
                 $("#btn_getMine-Transactions").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/mine-transactions_____________________________");
                     get_req("http://localhost:3001/mine-transactions");
@@ -69,6 +78,9 @@
             {
                 $("#btn_getPublic-Key").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/public-key_____________________________");
                     get_req("http://localhost:3001/public-key");
@@ -79,9 +91,81 @@
             {
                 $("#btn_getBalance").click(function()
                 {
+                    if($('#input').css('display')!='none'){
+                        $('#input').hide();
+                    }
                     $ptty.run_command('clear');
                     $ptty.echo("_____________________________/balance_____________________________");
                     get_req("http://localhost:3001/balance");
+                });
+            });
+
+            $(document).ready(function()
+            {
+                $("#btn_postTransact").click(function()
+                {
+                    $ptty.run_command('clear');
+                    $ptty.echo("_____________________________/transact_____________________________");
+                    
+                    if($('#input').css('display')=='none'){
+                        $('#input').show();
+                    }
+
+                    $("#btn_sendTransact").click(function(){
+                        
+                        $ptty.run_command('clear');
+                        $ptty.echo("_____________________________/transact_____________________________");
+                        
+                        
+                        if($.trim($("#indata_recipient").val()) == '')
+                        {
+                            $ptty.echo("\n\nWARN: inserire il Wallet destinazione");
+                            return;
+                        }
+                        else{
+                            $ptty.echo("\n\nOK: Wallet destinazione");
+                        }
+                        if($("#indata_amount").val() == '')
+                        {
+                            $ptty.echo("\n\nWARN: inserire la quantità di denaro da inviare");
+                            return;
+                        }else{
+                            if($("#indata_amount").val() < 0)
+                            {
+                                $ptty.echo("\n\nWARN: inserire una quantità positiva di denaro da inviare");
+                                return;
+                            }else{
+                                $ptty.echo("\n\nOK: Quantità");
+                            }
+                        }
+
+                        var transact = new Object();
+                        transact.recipient = $("#indata_recipient").val();
+                        transact.amount = $("#indata_amount").val();
+
+                       // var myString = JSON.stringify(transact);
+
+                        //console.log(myString);
+
+                        // $.post("http://localhost:3001/transact", myString, function(result){
+                                
+                        //         console.log(result);
+                        // });
+
+                        $.ajax({
+                                type: 'POST',
+                                url: 'http://localhost:3001/transact',
+                                data: JSON.stringify(transact), // or JSON.stringify ({name: 'jonas'}),
+                                success: function(data) { console.log(data); },
+                                contentType: "application/json",
+                                dataType: 'json'
+                                
+                            });
+                        
+
+                        
+
+                    });
                 });
             });
         </script>
@@ -93,14 +177,26 @@
         <button id="btn_getMine-Transactions" >Mina le transazioni</button>
         <button id="btn_getPublic-Key" >Visualizza publicKey</button>
         <button id="btn_getBalance" >Visualizza il saldo</button>
+        <button id="btn_postTransact" >Invia denaro a un wallet</button> <br><br>
+
+        <div style="display: none" id="input">
+            Wallet destinazione: <input type="text" id="indata_recipient"><br>
+            Quantità:              <input type="number" id="indata_amount" min="1"><br>
+            <button id="btn_sendTransact" >Invia denaro</button>
+        </div>
 
 
         <div style="
-    position:fixed;
-    left:0px;
-    bottom:0px;
-    height: 50%;
-    width:100%;" contenteditable="false" id="terminal"></div>
+    display: inline-block;
+    position: relative;
+    overflow: auto;
+    resize: none;
+    width: 50%;
+    float: right;
+    height: 80%;
+    height: 50vh;" contenteditable="false" id="terminal"></div>
+
+    
         <script src="ptty.jquery.js"></script>
         <script src="terminal-manager.js"></script>
     </body>
