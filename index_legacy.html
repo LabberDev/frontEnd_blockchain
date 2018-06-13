@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="./terminal-manager.js"></script>
+        
+        <script>
+            items   =   [];
+
+            function get_req(req)
+            {
+                $.getJSON(req, function(data)
+                {                 
+                    items.push( "<pre style=\"font-size:170%;\" >" );
+                    if ( data == "" )
+                        items.push("Non ci sono dati presenti!");
+                    else if ( data.length > 0 )
+                        for (var i=0; i<data.length; i++)
+                        {
+                            items.push( "____________________________________________________________" );
+                            print_each(data[i]);
+                        }     
+                    else
+                        $.each( data, function( indice, valore )
+                        {
+                            items.push( "<b>" + indice + "</b>:   " + valore + "<br>");
+                        });
+                    
+                    $ptty.echo("\n\n");
+                    items.push( "</pre>" );
+                    for (var i=0; i<items.length; i++)
+                        // $ptty.echo(items[i]);
+                        document.write(items[i]);
+                    items   =   [];
+                });
+            }
+
+            function print_each( arrayToPrint )
+            {
+                items.push( "<pre style=\"font-size:93%;\" >" );
+                $.each( arrayToPrint, function( indice, valore )
+                {
+                    if (!(typeof(valore) === 'object'))
+                        items.push( "<b>" + indice + "</b>:   " + valore + "<br>" );
+                    else
+                    {   
+                        items.push( "<b>" + indice + "</b>:   " + "<br>" );
+                        print_each(valore);
+                    }
+                });
+                items.push( "</pre>" );
+            }
+            
+
+            $(document).ready(function()
+            {
+                $("#btn_getBlock").click(function()
+                {
+                    // $ptty.run_command('clear');
+                    // $ptty.echo("_____________________________/blocks_____________________________");
+                    // get_req("http://localhost:3001/blocks");      
+                    $.getJSON("http://localhost:3001/blocks", function(data)  
+                    {
+                        $ptty.echo(JSON.stringify(data, undefined, 2));
+                    });           
+                });
+            
+                $("#btn_getTransactions").click(function()
+                {
+                    $ptty.run_command('clear');
+                    $ptty.echo("_____________________________/transactions_____________________________");
+                    get_req("http://localhost:3001/transactions");
+                });
+            
+                $("#btn_getMine-Transactions").click(function()
+                {
+                    $ptty.run_command('clear');
+                    $ptty.echo("_____________________________/mine-transactions_____________________________");
+                    get_req("http://localhost:3001/mine-transactions");
+                });
+            
+                $("#btn_getPublic-Key").click(function()
+                {
+                    $ptty.run_command('clear');
+                    $ptty.echo("_____________________________/public-key_____________________________");
+                    get_req("http://localhost:3001/public-key");
+                });
+           
+                $("#btn_getBalance").click(function()
+                {
+                    $ptty.run_command('clear');
+                    $ptty.echo("_____________________________/balance_____________________________");
+                    get_req("http://localhost:3001/balance");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        
+        <button id="btn_getBlock" >Visualizza i blocchi della blockchain</button>
+        <button id="btn_getTransactions" >Visualizza le transazioni</button>
+        <button id="btn_getMine-Transactions" >Mina le transazioni</button>
+        <button id="btn_getPublic-Key" >Visualizza publicKey</button>
+        <button id="btn_getBalance" >Visualizza il saldo</button>
+
+
+        <div style="
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height: 50%;
+    width:100%;" contenteditable="false" id="terminal"></div>
+        <script src="ptty.jquery.js"></script>
+        <script src="terminal-manager.js"></script>
+    </body>
+
+</html>
