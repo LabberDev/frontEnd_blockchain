@@ -141,21 +141,30 @@
             <button class="button" id="btn_getMine-Transactions" >Mina le transazioni</button><br>
             <button class="button" id="btn_getPublic-Key" >Visualizza publicKey</button><br>
             <button class="button" id="btn_getBalance" >Visualizza il saldo</button><br>
-            <button class="button" id="btn_postTransact" >Invia denaro a un wallet</button> <br><br>
+            <button class="button" id="btn_postTransact" >Invia denaro a un wallet</button>
 
+
+            
+           
 
             <div style="display: none" id="input" class="transact">
                 <h2>Wallet destinazione:</h2>
                 <input type="text" id="indata_recipient" style="margin-left: 18px"><br>
-                <h2>Quantità:</h2><input type="number" id="indata_amount" min="1" style="margin-left: 18px"><br>
+                <h2>Quantità:</h2><input type="number" id="indata_amount" min="1" style="margin-left: 18px"><br><br>
                 <button id="btn_sendTransact" class="button" >Invia denaro</button>
+            </div>
+            
+            <div>
+                <h2>Porta:</h2>
+                <input type="number" id="input_portController" style="margin-left: 18px"><br><br>
+                <button id="btn_setPort" class="button" >Connessione Porta</button>
             </div>
         </div>
 
         
-        <div class="logo"></div>
+        <div class="logo">
         <div class="terminal" contenteditable="false" id="terminal"></div>
-
+    </div>
     
         <script src="ptty.jquery.js"></script>
         <script src="terminal-manager.js"></script>

@@ -17,13 +17,20 @@ h2 {
     font-family: Sans-serif;
 }
 
+h3 {
+    color: black;
+    margin-left: 18px;
+    font-size: 15px;
+    font-family: Sans-serif;
+}
+
 .terminal
 {
     display: inline-block;
     position: static;
     overflow: auto;
     resize: none;
-    width: 50%;
+    width: 100%;
     float: right;
     height: 100%;
     top:100px;
@@ -47,7 +54,7 @@ h2 {
     border: none;
     color: white;
     height:50px;
-    width:400px;
+    width:350px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -69,8 +76,8 @@ h2 {
     position: fixed;
     float: left;
     width:  45%;
-    height: 20%;
-    background:blue;
+    height: 100%;
+    background:white;
     right:18px;
     top: 18px;
 }
