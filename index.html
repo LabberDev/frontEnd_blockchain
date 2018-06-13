@@ -24,7 +24,7 @@
                     if($('#input').css('display')!='none'){
                         $('#input').hide();
                     }
-                    $ptty.echo("_____________________________/blocks_____________________________");
+                    // $ptty.echo("_____________________________/blocks_____________________________");
                     get_req("http://localhost:3001/blocks");
                 });
 
@@ -34,7 +34,7 @@
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
-                    $ptty.echo("_____________________________/transactions_____________________________");
+                    // $ptty.echo("_____________________________/transactions_____________________________");
                     get_req("http://localhost:3001/transactions");
                 });
 
@@ -44,7 +44,7 @@
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
-                    $ptty.echo("_____________________________/mine-transactions_____________________________");
+                    // $ptty.echo("_____________________________/mine-transactions_____________________________");
                     get_req("http://localhost:3001/mine-transactions");
                 });
 
@@ -54,7 +54,7 @@
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
-                    $ptty.echo("_____________________________/public-key_____________________________");
+                    // $ptty.echo("_____________________________/public-key_____________________________");
                     get_req("http://localhost:3001/public-key");
                 });
 
@@ -64,7 +64,7 @@
                         $('#input').hide();
                     }
                     $ptty.run_command('clear');
-                    $ptty.echo("_____________________________/balance_____________________________");
+                    // $ptty.echo("_____________________________/balance_____________________________");
                     get_req("http://localhost:3001/balance");
                 });
             
@@ -73,7 +73,7 @@
                 $("#btn_postTransact").click(function()
                 {
                     $ptty.run_command('clear');
-                    $ptty.echo("_____________________________/transact_____________________________");
+                    // $ptty.echo("_____________________________/transact_____________________________");
                     
                     if($('#input').css('display')=='none'){
                         $('#input').show();
@@ -85,7 +85,7 @@
                     $("#btn_sendTransact").click(function(){
                         
                         $ptty.run_command('clear');
-                        $ptty.echo("_____________________________/transact_____________________________");
+                        // $ptty.echo("_____________________________/transact_____________________________");
                         
                         
                         if($.trim($("#indata_recipient").val()) == '')
@@ -134,30 +134,27 @@
         </script>
     </head>
     <body>
-        
-        <button id="btn_getBlock" >Visualizza i blocchi della blockchain</button>
-        <button id="btn_getTransactions" >Visualizza le transazioni</button>
-        <button id="btn_getMine-Transactions" >Mina le transazioni</button>
-        <button id="btn_getPublic-Key" >Visualizza publicKey</button>
-        <button id="btn_getBalance" >Visualizza il saldo</button>
-        <button id="btn_postTransact" >Invia denaro a un wallet</button> <br><br>
+        <div class="buttons" id="buttons">
+            <h1>Funzioni disponibili:</h1>
+            <button class="button" id="btn_getBlock" >Visualizza i blocchi della blockchain</button><br>
+            <button class="button" id="btn_getTransactions" >Visualizza le transazioni</button><br>
+            <button class="button" id="btn_getMine-Transactions" >Mina le transazioni</button><br>
+            <button class="button" id="btn_getPublic-Key" >Visualizza publicKey</button><br>
+            <button class="button" id="btn_getBalance" >Visualizza il saldo</button><br>
+            <button class="button" id="btn_postTransact" >Invia denaro a un wallet</button> <br><br>
 
-        <div style="display: none" id="input">
-            Wallet destinazione: <input type="text" id="indata_recipient"><br>
-            Quantità:              <input type="number" id="indata_amount" min="1"><br>
-            <button id="btn_sendTransact" >Invia denaro</button>
+
+            <div style="display: none" id="input" class="transact">
+                <h2>Wallet destinazione:</h2>
+                <input type="text" id="indata_recipient" style="margin-left: 18px"><br>
+                <h2>Quantità:</h2><input type="number" id="indata_amount" min="1" style="margin-left: 18px"><br>
+                <button id="btn_sendTransact" class="button" >Invia denaro</button>
+            </div>
         </div>
 
-
-        <div style="
-    display: inline-block;
-    position: relative;
-    overflow: auto;
-    resize: none;
-    width: 50%;
-    float: right;
-    height: 10%;
-    height: 100vh;" contenteditable="false" id="terminal"></div>
+        
+        <div class="logo"></div>
+        <div class="terminal" contenteditable="false" id="terminal"></div>
 
     
         <script src="ptty.jquery.js"></script>

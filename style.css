@@ -1,13 +1,23 @@
 body {
     background-color: white;
+    border: 2px solid #008CBA;
 }
 
 h1 {
-    color: navy;
-    margin-left: 20px;
+    color: black;
+    margin-left: 18px;
+    font-size: 22px;
+    font-family: Sans-serif;
 }
 
-#terminal
+h2 {
+    color: black;
+    margin-left: 18px;
+    font-size: 18px;
+    font-family: Sans-serif;
+}
+
+.terminal
 {
     display: inline-block;
     position: static;
@@ -16,41 +26,51 @@ h1 {
     width: 50%;
     float: right;
     height: 100%;
-    top:10px;
+    top:100px;
     right: 10px;
     background: orange;
 }
 
-#buttons
+.buttons
 {
-    position:fixed;
-    float: right;
+    position: fixed;
+    float: left;
     width:  45%;
-    height: 100%;
+    height: 60%;
     background:white;
     left:18px;
     top: 18px;
 }
 
-.button
-{
+.button {
+    background-color: #008CBA; /* Blue */
     border: none;
     color: white;
-    padding: 13px 20px;
+    height:50px;
+    width:400px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px 18px;
+    margin: 6px 4px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
+}
+
+.button:hover {
     background-color: white; 
     color: black; 
     border: 2px solid #008CBA;
 }
 
-.button:hover {
-    background-color: #008CBA;
-    color: white;
+.logo
+{
+    position: fixed;
+    float: left;
+    width:  45%;
+    height: 20%;
+    background:blue;
+    right:18px;
+    top: 18px;
 }
