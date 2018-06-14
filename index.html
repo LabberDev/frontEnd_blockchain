@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="./style/style.css">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         
@@ -143,9 +143,7 @@
                             $ptty.echo("\n\nWARN: inserire il Wallet destinazione");
                             return;
                         }
-                        else{
-                            $ptty.echo("\n\nOK: Wallet destinazione");
-                        }
+                        
                         if($("#indata_amount").val() == '')
                         {
                             $ptty.echo("\n\nWARN: inserire la quantità di denaro da inviare");
@@ -155,8 +153,6 @@
                             {
                                 $ptty.echo("\n\nWARN: inserire una quantità positiva di denaro da inviare");
                                 return;
-                            }else{
-                                $ptty.echo("\n\nOK: Quantità");
                             }
                         }
 
@@ -208,13 +204,13 @@
         
         <div class="logo">
             <div class="img">
-                <img src="logo.png" style="width:273px;height:112px;" align="middle">
+                <img src="./style/logo.png" style="width:273px;height:112px;" align="middle">
             </div>
             <div class="terminal" contenteditable="false" id="terminal"></div>
         </div>
     
-        <script src="ptty.jquery.js"></script>
-        <script src="terminal-manager.js"></script>
+        <script src="./terminal/ptty.jquery.js"></script>
+        <script src="./terminal/terminal-manager.js"></script>
     </body>
 
 </html>
